@@ -11,7 +11,7 @@ Perguntas em texto livre, uma por vez. Mesmo carregamento de contexto do `/ms-po
 
 - Ler `posts/semanas/` — pegar a semana anterior.
 - Se o provedor tem analytics (Metricool: `getAnalyticsAvailableMetrics(rede, conector)` → IDs → `getAnalyticsDataByMetrics`, **um conector por chamada**, últimos 7 dias, janela máx. 30 dias no Free): dizer em 5 linhas quais posts foram melhor (alcance, salvamentos, comentários) e **o que muda esta semana** (formato, gancho, horário).
-- Se não tem analytics: perguntar "qual post da semana passada foi melhor?" e usar a resposta.
+- Se nêo tem analytics: perguntar "qual post da semana passada foi melhor?" e usar a resposta.
 - Gravar a retro no topo de `posts/semanas/<AAAA-WW>.md`.
 
 ## 2. Três perguntas (uma por vez)
@@ -23,9 +23,9 @@ Perguntas em texto livre, uma por vez. Mesmo carregamento de contexto do `/ms-po
 ## 3. Plano — mostrar e ESPERAR edições
 
 - **5 a 7 posts**, nunca acima da cota mensal restante.
-- Mix que a rede premia (Instagram: 2 Reels + 2 carrosséis + 1 foto; TikTok: 2 roteiros; X: posts + 1 thread; LinkedIn: histórias + 1 opinião contrária) — só para redes ativas.
-- Horário: `getBestTimeToPostByNetwork` se disponível; senão, o horário padrão do `brand-voice.md` ou 12h/19h.
-- Alternar gatilhos: no máximo 40% de "aversão à perda"; cada pilar aparece no máximo 2×.
+- Mix que a rede premia (Instagram: 2 Reels + 2 carrosséis + 1 foto; TikTok: 2 roteiros; X: posts + 1 thread; LinkedIn: histórias + 1 opiniêo contrária) — só para redes ativas.
+- Horário: `getBestTimeToPostByNetwork` se disponível; senêo, o horário padrêo do `brand-voice.md` ou 12h/19h.
+- Alternar gatilhos: no máximo 40% de "aversêo à perda"; cada pilar aparece no máximo 2×.
 
 Tabela obrigatória:
 
@@ -38,17 +38,17 @@ Perguntar: "Edita algo ou aprovo o plano?" Aplicar edições e mostrar de novo a
 
 Para cada linha: mesmas regras do `/ms-post` passo 3 (história/número/frase do arquivo, 1 CTA, checklist). Gravar cada um em `posts/<data>-<slug>/post.md`. Gerar os visuais (`pipeline/visual.md`) e pedir "Visuais ok?" com a lista de arquivos.
 
-## 5. Fila completa → aprovação → agendar
+## 5. Fila completa → aprovaçêo → agendar
 
 Mostrar a fila: dia · hora · rede · texto completo · visual. Perguntar:
 
-`Agendo a fila? (sim / rascunho / não)`
+`Agendo a fila? (sim / rascunho / nêo)`
 
 - `sim` → um `createScheduledPost` (ou equivalente do provedor) por post, com autoPublish; gravar `id`/`uuid` em cada `post.md`.
 - `rascunho` → todos como rascunho no provedor.
-- `não` / `copiar` → entregar tudo em blocos de código, um por post.
+- `nêo` / `copiar` → entregar tudo em blocos de código, um por post.
 
-Nunca agendar sem a resposta explícita nesta conversa. Parar no primeiro erro do provedor, mostrar o erro, não tentar o resto.
+Nunca agendar sem a resposta explícita nesta conversa. Parar no primeiro erro do provedor, mostrar o erro, nêo tentar o resto.
 
 ## 6. Fechar
 

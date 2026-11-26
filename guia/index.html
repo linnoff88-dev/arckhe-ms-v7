@@ -123,17 +123,17 @@
 <a class="btn ghost" href="https://github.com/inematds/ms-v7" rel="noopener" target="_blank">Ver no GitHub</a>
 </div>
 </div>
-<figure><img alt="Ilustração do MS-v7 Social Autopilot" src="assets/hero.jpg"/></figure>
+<figure><img alt="Ilustraçêo do MS-v7 Social Autopilot" src="assets/hero.jpg"/></figure>
 </div>
 </header>
 <section id="oque"><div class="wrap">
 <span class="chip">O que é</span>
-<h2>Automação de redes sociais sem código, sem parecer IA</h2>
-<p class="sub">Adaptação do "Social Autopilot" para a stack INEMA: tudo roda dentro do Claude Code, com provedores, marcas e redes configuráveis num único <code>config.yaml</code>.</p>
+<h2>Automaçêo de redes sociais sem código, sem parecer IA</h2>
+<p class="sub">Adaptaçêo do "Social Autopilot" para a stack INEMA: tudo roda dentro do Claude Code, com provedores, marcas e redes configuráveis num único <code>config.yaml</code>.</p>
 <div class="grid g3">
 <div class="card"><h3>🧬 Voz de marca</h3><p>Um <code>brand-voice.md</code> por marca: quem você é, público, ofertas, frases reais, histórias verdadeiras e regras por rede. É o que faz o post soar como você.</p></div>
-<div class="card"><h3>🔌 Provedores plugáveis</h3><p>Publicação via Metricool (validado), Blotato ou copiar à mão. Imagem com flux2-klein ou Magnific. Troca de provedor é uma linha no config.</p></div>
-<div class="card"><h3>✅ Aprovação é feature</h3><p>Toda publicação passa pelo gate <em>sim / rascunho / não</em>. Nada é agendado sem a sua resposta explícita na conversa.</p></div>
+<div class="card"><h3>🔌 Provedores plugáveis</h3><p>Publicaçêo via Metricool (validado), Blotato ou copiar à mêo. Imagem com flux2-klein ou Magnific. Troca de provedor é uma linha no config.</p></div>
+<div class="card"><h3>✅ Aprovaçêo é feature</h3><p>Toda publicaçêo passa pelo gate <em>sim / rascunho / nêo</em>. Nada é agendado sem a sua resposta explícita na conversa.</p></div>
 </div>
 </div></section>
 <section id="fluxo"><div class="wrap">
@@ -153,13 +153,13 @@
 <div class="card"><div class="num">1</div><h3>/ms-config</h3><p>Entrevista de voz (uma pergunta por vez), redes ativas e provedores. Uma vez por marca.</p></div>
 <div class="card"><div class="num">2</div><h3>/ms-post</h3><p>O post de hoje. Três perguntas, três opções, visual e agendamento.</p></div>
 <div class="card"><div class="num">3</div><h3>/ms-semana</h3><p>Retro da semana passada, tabela de 5-7 posts para aprovar, fila agendada. ~15 min.</p></div>
-<div class="card"><div class="num">4</div><h3>/ms-reaproveita</h3><p>Transcrição, artigo ou URL vira um post autônomo por rede.</p></div>
+<div class="card"><div class="num">4</div><h3>/ms-reaproveita</h3><p>Transcriçêo, artigo ou URL vira um post autônomo por rede.</p></div>
 </div>
 </div></section>
 <section id="pre"><div class="wrap">
 <span class="chip">Pré-requisitos</span>
 <h2>O que precisa estar pronto</h2>
-<p class="sub">Só o Claude Code é obrigatório. Sem provedor de publicação, as skills entregam o texto pronto para copiar.</p>
+<p class="sub">Só o Claude Code é obrigatório. Sem provedor de publicaçêo, as skills entregam o texto pronto para copiar.</p>
 <div class="grid g3">
 <div class="card"><h3>Claude Code</h3><p>Plano Pro ou superior. Abra dentro da pasta do projeto: ele lê o <code>CLAUDE.md</code> sozinho.</p><pre><span class="c"># clonar e abrir</span>
 <span class="k">git clone</span> <span class="s">git@github.com:inematds/ms-v7.git</span> ~/projetos/ms-v7
@@ -167,18 +167,18 @@
 <div class="card"><h3>Metricool MCP (opcional)</h3><p>Agenda Instagram, TikTok e mais. Plano Free: 20 posts/mês, sem LinkedIn/X.</p><pre><span class="k">claude mcp add</span> --transport http metricool \
   <span class="s">https://ai.metricool.com/mcp</span> -s user
 <span class="c"># depois: /mcp → metricool → Authenticate</span></pre></div>
-<div class="card"><h3>Host de mídia (opcional)</h3><p>Provedores MCP só aceitam URL direta. O padrão é um GitHub Release; as skills sobem sozinhas.</p><pre><span class="k">gh release upload</span> v1 arquivo.png \
+<div class="card"><h3>Host de mídia (opcional)</h3><p>Provedores MCP só aceitam URL direta. O padrêo é um GitHub Release; as skills sobem sozinhas.</p><pre><span class="k">gh release upload</span> v1 arquivo.png \
   --repo inematds/midia --clobber</pre></div>
 </div>
 </div></section>
 <section id="guia"><div class="wrap">
 <span class="chip">Guia de uso · passo a passo</span>
 <h2>Do zero ao primeiro post agendado</h2>
-<p class="sub">Todos os comandos abaixo são digitados dentro do Claude Code, na pasta do projeto. As perguntas são sempre em texto livre, uma por vez.</p>
+<p class="sub">Todos os comandos abaixo sêo digitados dentro do Claude Code, na pasta do projeto. As perguntas sêo sempre em texto livre, uma por vez.</p>
 <div class="step"><div class="b">1</div><div>
 <h3>Configure a marca</h3>
 <p>Cria <code>brands/&lt;slug&gt;/brand-voice.md</code> com entrevista e preenche o <code>config.yaml</code>. Se a marca já está descrita em algum lugar, diga onde: ele pré-preenche e só pergunta o que falta.</p>
-<pre><span class="k">/ms-config</span>  <span class="c"># voz → redes ativas → provedor de publicação → teste de voz</span></pre>
+<pre><span class="k">/ms-config</span>  <span class="c"># voz → redes ativas → provedor de publicaçêo → teste de voz</span></pre>
 </div></div>
 <div class="step"><div class="b">2</div><div>
 <h3>Faça o post de hoje</h3>
@@ -192,10 +192,10 @@
 <h3>Aprove o visual e o agendamento</h3>
 <p>O visual sai do provedor de imagem configurado. Depois ele mostra o post final com o melhor horário e espera a sua resposta.</p>
 <pre><span class="c"># Visual ok?                        → sim</span>
-<span class="c"># Agendo? (sim / rascunho / não)</span>
-<span class="k">sim</span>       <span class="c"># agenda com publicação automática</span>
-<span class="k">rascunho</span>  <span class="c"># fica no planner do provedor, não publica</span>
-<span class="k">não</span>       <span class="c"># só o texto, para copiar</span></pre>
+<span class="c"># Agendo? (sim / rascunho / nêo)</span>
+<span class="k">sim</span>       <span class="c"># agenda com publicaçêo automática</span>
+<span class="k">rascunho</span>  <span class="c"># fica no planner do provedor, nêo publica</span>
+<span class="k">nêo</span>       <span class="c"># só o texto, para copiar</span></pre>
 </div></div>
 <div class="step"><div class="b">4</div><div>
 <h3>Planeje a semana em 15 minutos</h3>
@@ -204,7 +204,7 @@
 </div></div>
 <div class="step"><div class="b">5</div><div>
 <h3>Reaproveite um vídeo ou artigo</h3>
-<p>Cole a transcrição, o caminho do arquivo ou a URL. Única pergunta: quais redes. Cada post sai autônomo, nunca "neste vídeo".</p>
+<p>Cole a transcriçêo, o caminho do arquivo ou a URL. Única pergunta: quais redes. Cada post sai autônomo, nunca "neste vídeo".</p>
 <pre><span class="k">/ms-reaproveita</span> <span class="s">https://youtube.com/watch?v=...</span>  <span class="c"># ou um .md, .txt, URL de artigo</span></pre>
 </div></div>
 <div class="step"><div class="b">6</div><div>
@@ -236,11 +236,11 @@ provedores:
 <section id="roadmap"><div class="wrap">
 <span class="chip">Roadmap</span>
 <h2>Onde está e para onde vai</h2>
-<p class="sub">Versão 1.0.0. O fluxo manual roda primeiro; automação por cron só depois de semanas sem falha.</p>
+<p class="sub">Versêo 1.0.0. O fluxo manual roda primeiro; automaçêo por cron só depois de semanas sem falha.</p>
 <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Base configurável</strong><span>config.yaml, template de voz, 4 skills, receitas de Metricool / Blotato / copiar, flux2-klein e Magnific. Publicado.</span></div></div>
 <div class="phase"><div class="tag">próx.</div><div class="d"><strong>Primeira marca real</strong><span>Rodar /ms-config na INEMA, validar o carrossel no Metricool e o primeiro post publicado de ponta a ponta.</span></div></div>
-<div class="phase"><div class="tag">fase 2</div><div class="d"><strong>Mais redes e vídeo</strong><span>LinkedIn/X via plano pago ou Blotato; Reels gerados com kling via Magnific quando a cena não dá para filmar.</span></div></div>
-<div class="phase"><div class="tag">fase 3</div><div class="d"><strong>Semana automática</strong><span>/ms-semana agendado toda segunda pela skill schedule, mantendo o gate de aprovação.</span></div></div>
+<div class="phase"><div class="tag">fase 2</div><div class="d"><strong>Mais redes e vídeo</strong><span>LinkedIn/X via plano pago ou Blotato; Reels gerados com kling via Magnific quando a cena nêo dá para filmar.</span></div></div>
+<div class="phase"><div class="tag">fase 3</div><div class="d"><strong>Semana automática</strong><span>/ms-semana agendado toda segunda pela skill schedule, mantendo o gate de aprovaçêo.</span></div></div>
 </div></section>
 <footer>
 <div class="wrap">

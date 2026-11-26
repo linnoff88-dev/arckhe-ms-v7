@@ -1,6 +1,6 @@
-# ms-v7 — configuração do Social Autopilot
-# Preencha com /ms-config (entrevista) ou edite à mão.
-# Tudo que está como null / [] ainda NÃO foi configurado — as skills avisam e caem no modo copy-paste.
+# ms-v7 — configuraçêo do Social Autopilot
+# Preencha com /ms-config (entrevista) ou edite à mêo.
+# Tudo que está como null / [] ainda NêO foi configurado — as skills avisam e caem no modo copy-paste.
 
 versao_config: 1
 
@@ -19,7 +19,7 @@ marcas:
   #     instagram: { conta: "@inemafuturos", ativa: true }
   #     tiktok:    { conta: "@lnema.club",  ativa: true }
   #     youtube:   { conta: "UC...",         ativa: false, motivo: "canal-origem do yt-pub-lives; agendar duplica" }
-  #     linkedin:  { conta: null,            ativa: false, motivo: "não disponível no plano Free da Metricool" }
+  #     linkedin:  { conta: null,            ativa: false, motivo: "nêo disponível no plano Free da Metricool" }
   #     x:         { conta: null,            ativa: false }
   #     facebook:  { conta: null,            ativa: false }
   #   publicacao:
@@ -40,7 +40,7 @@ provedores:
 
   imagem:
     padrao: flux2-klein          # flux2-klein | magnific | nenhum
-    fallback: magnific           # usado quando o padrão não dá conta (referência de personagem, edição guiada, upscale)
+    fallback: magnific           # usado quando o padrêo nêo dá conta (referência de personagem, ediçêo guiada, upscale)
     disponiveis:
       flux2-klein: { tipo: local, custo: 0,              doc: pipeline/visual.md#flux2-klein }
       magnific:    { tipo: mcp,   custo: "5-100 créditos/imagem", doc: pipeline/visual.md#magnific }
@@ -60,13 +60,13 @@ provedores:
   pesquisa:
     padrao: agent-reach          # agent-reach | websearch | nenhum
 
-  voz_tts:                       # narração para Reels/TikTok, se precisar
+  voz_tts:                       # narraçêo para Reels/TikTok, se precisar
     padrao: inemavox
     engine: chatterbox
     voz: rachel
 
 # ---------------------------------------------------------------------------
-# REGRAS DE SEGURANÇA — não mudam por marca
+# REGRAS DE SEGURANÇA — nêo mudam por marca
 # ---------------------------------------------------------------------------
 regras:
   aprovacao_obrigatoria: true    # nada é agendado/publicado sem "sim" explícito no chat

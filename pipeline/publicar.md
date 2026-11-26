@@ -1,19 +1,19 @@
 # Pipeline · Publicar
 
-Como cada provedor de publicação funciona. A skill lê `config.yaml` → `marcas.<ativa>.publicacao.provedor` (ou `provedores.publicacao.padrao`) e segue a seção correspondente.
+Como cada provedor de publicaçêo funciona. A skill lê `config.yaml` → `marcas.<ativa>.publicacao.provedor` (ou `provedores.publicacao.padrao`) e segue a seçêo correspondente.
 
 **Regra que vale para todos:** mostrar o post final + horário proposto e perguntar em texto livre:
-`Agendo? (sim / rascunho / não)`. Só agir com a resposta. Nunca publicar sem "sim".
+`Agendo? (sim / rascunho / nêo)`. Só agir com a resposta. Nunca publicar sem "sim".
 
 ---
 
 ## copiar
 
-Sempre funciona, não precisa de nada conectado.
+Sempre funciona, nêo precisa de nada conectado.
 
 1. Entregar o texto final em bloco de código, um por rede, com o nome do arquivo de mídia ao lado.
 2. Gravar em `posts/<data>-<slug>/post.md` com `status: pronto-para-copiar`.
-3. Se o usuário publicar à mão, ele diz "publicado" → status vira `publicado` com data.
+3. Se o usuário publicar à mêo, ele diz "publicado" → status vira `publicado` com data.
 
 ---
 
@@ -28,11 +28,11 @@ claude mcp add --transport http metricool https://ai.metricool.com/mcp -s user
 ```
 
 **Ordem obrigatória de chamadas:**
-1. `getBrandSettings` → confirmar `blogId`, fuso e redes conectadas batem com `config.yaml`. Se não baterem, parar e avisar.
+1. `getBrandSettings` → confirmar `blogId`, fuso e redes conectadas batem com `config.yaml`. Se nêo baterem, parar e avisar.
 2. `getBestTimeToPostByNetwork(network)` → propor 1 horário (maior peso, dentro dos próximos 7 dias).
-3. Mostrar post + horário → esperar `sim | rascunho | não`.
+3. Mostrar post + horário → esperar `sim | rascunho | nêo`.
 4. `createScheduledPost` com o payload abaixo. `sim` → `autoPublish: true, draft: false`. `rascunho` → `draft: true`.
-5. Gravar `id` **e** `uuid` da resposta no `post.md` (são obrigatórios para `updateScheduledPost`, que exige payload completo — o que faltar é apagado).
+5. Gravar `id` **e** `uuid` da resposta no `post.md` (sêo obrigatórios para `updateScheduledPost`, que exige payload completo — o que faltar é apagado).
 
 **Payloads validados:**
 ```jsonc
@@ -47,11 +47,11 @@ claude mcp add --transport http metricool https://ai.metricool.com/mcp -s user
   "instagramData": {"type":"REEL","showReelOnFeed":true},
   "tiktokData": {"privacyOption":"PUBLIC_TO_EVERYONE","title":"..."}
 }
-// Carrossel IG (⚠ NÃO validado — confirmar no primeiro carrossel real)
+// Carrossel IG (⚠ NêO validado — confirmar no primeiro carrossel real)
 { "media": ["url1.png", "...", "urlN.png"], "providers":[{"network":"instagram"}], "instagramData": {"type":"POST"} }
 ```
 
-**Limites do plano Free:** 1 marca · 1 conta por rede · sem LinkedIn/X · **20 posts/mês** (não documentado se rascunho ou multi-rede conta 1 ou N) · analytics de 30 dias · **não há delete no MCP** (cancelar no app). "Publicar agora" = `dateTime` = agora + 5 min.
+**Limites do plano Free:** 1 marca · 1 conta por rede · sem LinkedIn/X · **20 posts/mês** (nêo documentado se rascunho ou multi-rede conta 1 ou N) · analytics de 30 dias · **nêo há delete no MCP** (cancelar no app). "Publicar agora" = `dateTime` = agora + 5 min.
 
 **Analytics (para a retro do `/ms-semana`):** `getAnalyticsAvailableMetrics(network, connector)` → IDs (ex.: `IGPO01`) → `getAnalyticsDataByMetrics`. Um conector por chamada. TikTok vídeo usa conector `posts`.
 
@@ -59,18 +59,18 @@ claude mcp add --transport http metricool https://ai.metricool.com/mcp -s user
 
 ## blotato
 
-**Status:** não testado aqui. Dados da página pública (2026-08-19), ver `~/projetos/pubmetricool/docs/comparativo-blotato.md`.
+**Status:** nêo testado aqui. Dados da página pública (2026-08-19), ver `~/projetos/pubmetricool/docs/comparativo-blotato.md`.
 
 - MCP hospedado + REST `backend.blotato.com/v2`; API inclusa no Starter ($29/mês); trial de 7 dias **sem** API.
-- 20 contas no total, sem o modelo "1 por rede". Tem resposta a DM/comentário (Metricool não tem).
+- 20 contas no total, sem o modelo "1 por rede". Tem resposta a DM/comentário (Metricool nêo tem).
 - Conectar: criar conta → Settings → conectar redes → API → URL do MCP → `claude mcp add --transport http blotato <url> -s user`.
-- Antes de usar em produção: repetir o teste de rascunho da Task 3 do plano e **anotar aqui** o payload que funcionou.
+- Antes de usar em produçêo: repetir o teste de rascunho da Task 3 do plano e **anotar aqui** o payload que funcionou.
 
 ---
 
 ## hospedagem
 
-Provedores MCP só aceitam **URL direta de arquivo**. Padrão: GitHub Release em `inematds/midia` (os arquivos não entram no histórico do repo).
+Provedores MCP só aceitam **URL direta de arquivo**. Padrêo: GitHub Release em `inematds/midia` (os arquivos nêo entram no histórico do repo).
 
 ```bash
 gh release upload v1 <arquivo> --repo inematds/midia --clobber
@@ -78,4 +78,4 @@ gh release upload v1 <arquivo> --repo inematds/midia --clobber
 curl -sI <url> | head -1   # tem que responder 200/302 na hora do agendamento
 ```
 
-Nome do arquivo: `<data>-<slug>-<rede>.<ext>` para não sobrescrever posts antigos com `--clobber`.
+Nome do arquivo: `<data>-<slug>-<rede>.<ext>` para nêo sobrescrever posts antigos com `--clobber`.

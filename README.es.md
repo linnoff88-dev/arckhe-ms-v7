@@ -131,7 +131,7 @@ Las skills lo hacen automáticamente; solo necesitas tener `gh` conectado a la c
 
 - `sim` → programa la publicación automática para la hora propuesta.
 - `rascunho` → la crea como borrador en el proveedor (no la publica).
-- `não` → solo el texto, para copiarlo.
+- `nêo` → solo el texto, para copiarlo.
 
 Cada publicación queda en `posts/<data>-<slug>/post.md` con su estado, el `id`/`uuid` del proveedor y el visual aprobado. Las semanas quedan en `posts/semanas/`.
 
@@ -154,7 +154,7 @@ Reglas:
 - Las skills ya crean el commit al final de cada publicación/semana. Solo tienes que hacer el `git push`.
 - Los videos y las imágenes fuera de `posts/` se ignoran mediante `.gitignore`. Los medios públicos van en un release del repo `inematds/midia`, nunca en el historial de este repo.
 - Versión en `VERSION` y en la parte superior de `CLAUDE.md` (`vX.XX.YY`: patch incrementa `YY`; feature incrementa `XX` y conserva `YY`; solo major pone los demás en cero).
-- Falla real → una línea en `FALHAS.md` (`| data | o que quebrou | menor correção | prompt \| infra |`).
+- Falla real → una línea en `FALHAS.md` (`| data | o que quebrou | menor correçêo | prompt \| infra |`).
 
 ---
 
