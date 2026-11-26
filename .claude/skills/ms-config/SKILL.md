@@ -9,8 +9,8 @@ Perguntas SEMPRE em texto livre, **uma por vez**, esperando a resposta. Nunca us
 
 ## Modo A — Nova marca (ou `marca_ativa: null`)
 
-1. Perguntar o **slug** da marca (ex.: `inema`). Criar `brands/<slug>/` copiando `brands/_template/brand-voice.md`.
-2. **Pré-preencher o que já existe** antes de perguntar: se o usuário citar um projeto/skill/site que já descreve a marca, ler de lá (ex.: para INEMA, `~/.claude/skills/roteirista-inema/SKILL.md` já tem público, tese, palavras proibidas, produtos). Mostrar o que foi pré-preenchido e pedir correçêo.
+1. Perguntar o **slug** da marca (ex.: `ARCKHÉ`). Criar `brands/<slug>/` copiando `brands/_template/brand-voice.md`.
+2. **Pré-preencher o que já existe** antes de perguntar: se o usuário citar um projeto/skill/site que já descreve a marca, ler de lá (ex.: para ARCKHÉ, `~/.claude/skills/roteirista-ARCKHÉ/SKILL.md` já tem público, tese, palavras proibidas, produtos). Mostrar o que foi pré-preenchido e pedir correçêo.
 3. **Entrevista** só das lacunas, nesta ordem, uma pergunta por vez, **rejeitando resposta vaga** ("muitos alunos" → "quantos?"; "sou bom nisso" → "que número prova?"):
    - QUEM SOU em uma frase
    - PÚBLICO: quem é, o que quer e nêo tem

@@ -8,15 +8,15 @@ versao_config: 1
 # MARCA ATIVA — qual pasta em brands/ as skills devem usar.
 # Pode haver várias marcas; só uma é a ativa por vez (troque aqui ou diga "usa a marca X").
 # ---------------------------------------------------------------------------
-marca_ativa: null            # ex.: inema  → lê brands/inema/brand-voice.md
+marca_ativa: null            # ex.: ARCKHÉ  → lê brands/ARCKHÉ/brand-voice.md
 
 marcas:
-  # inema:
-  #   nome: INEMA
+  # ARCKHÉ:
+  #   nome: ARCKHÉ
   #   fuso: America/Sao_Paulo
   #   idioma: pt-BR
   #   redes:                       # só redes listadas aqui recebem posts
-  #     instagram: { conta: "@inemafuturos", ativa: true }
+  #     instagram: { conta: "@ARCKHÉfuturos", ativa: true }
   #     tiktok:    { conta: "@lnema.club",  ativa: true }
   #     youtube:   { conta: "UC...",         ativa: false, motivo: "canal-origem do yt-pub-lives; agendar duplica" }
   #     linkedin:  { conta: null,            ativa: false, motivo: "nêo disponível no plano Free da Metricool" }
@@ -55,13 +55,13 @@ provedores:
   hospedagem:                    # onde a mídia fica pública (provedores MCP só aceitam URL direta)
     padrao: gh-release
     disponiveis:
-      gh-release: { repo: inematds/midia, tag: v1, doc: pipeline/publicar.md#hospedagem }
+      gh-release: { repo: linnoff88-dev/midia, tag: v1, doc: pipeline/publicar.md#hospedagem }
 
   pesquisa:
     padrao: agent-reach          # agent-reach | websearch | nenhum
 
   voz_tts:                       # narraçêo para Reels/TikTok, se precisar
-    padrao: inemavox
+    padrao: ARCKHÉvox
     engine: chatterbox
     voz: rachel
 

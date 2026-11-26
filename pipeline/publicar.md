@@ -39,7 +39,7 @@ claude mcp add --transport http metricool https://ai.metricool.com/mcp -s user
 // Reel IG + TikTok (validado)
 {
   "text": "legenda...",
-  "media": ["https://github.com/inematds/midia/releases/download/v1/x.mp4"],
+  "media": ["https://github.com/linnoff88-dev/midia/releases/download/v1/x.mp4"],
   "providers": [{"network":"instagram"},{"network":"tiktok"}],
   "publicationDate": {"dateTime":"2026-09-15T12:00:00","timezone":"America/Sao_Paulo"},
   "autoPublish": true,
@@ -70,11 +70,11 @@ claude mcp add --transport http metricool https://ai.metricool.com/mcp -s user
 
 ## hospedagem
 
-Provedores MCP só aceitam **URL direta de arquivo**. Padrêo: GitHub Release em `inematds/midia` (os arquivos nêo entram no histórico do repo).
+Provedores MCP só aceitam **URL direta de arquivo**. Padrêo: GitHub Release em `linnoff88-dev/midia` (os arquivos nêo entram no histórico do repo).
 
 ```bash
-gh release upload v1 <arquivo> --repo inematds/midia --clobber
-# → https://github.com/inematds/midia/releases/download/v1/<arquivo>
+gh release upload v1 <arquivo> --repo linnoff88-dev/midia --clobber
+# → https://github.com/linnoff88-dev/midia/releases/download/v1/<arquivo>
 curl -sI <url> | head -1   # tem que responder 200/302 na hora do agendamento
 ```
 

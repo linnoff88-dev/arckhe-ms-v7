@@ -35,4 +35,4 @@ Ler `~/.claude/runbooks/magnific-modelos.md` antes de escolher. Resumo: `z-image
 | `video-explicativo` / `hyperframes` | explicativo HTML→MP4 com narraçêo | 0 |
 | `magnific-kling` (`kling-25`) | cena impossível de filmar | 140cr / 5s 720p |
 
-Narraçêo: inemavox TTS (engine `chatterbox`, voz `rachel`). Música/SFX: inemavox/dlp. Vídeo de avatar do Nei: skill `avatar-heygen-nei`.
+Narraçêo: ARCKHÉvox TTS (engine `chatterbox`, voz `rachel`). Música/SFX: ARCKHÉvox/dlp. Vídeo de avatar do Nei: skill `avatar-heygen-nei`.

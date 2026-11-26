@@ -1,14 +1,14 @@
-# MS-v7 — Social Autopilot INEMA · Plano de Implementaçêo
+# MS-v7 — Social Autopilot ARCKHÉ · Plano de Implementaçêo
 
 > **Para agentes executores:** usar `superpowers:executing-plans` (inline) ou `superpowers:subagent-driven-development`, tarefa por tarefa. Passos usam checkbox (`- [ ]`). Perguntas ao usuário sêo SEMPRE em texto livre (nunca `AskUserQuestion`).
 
-> **Nota de execuçêo (2026-09-13):** o projeto foi construído com **provedores, marca e redes configuráveis** em `config.yaml` (decisêo do usuário), em vez de fixar Metricool/inemafuturos. As Tasks 0, 2, 3, 4 e 5 estêo implementadas como skills + receitas genéricas; a Task 1 (voz de marca) virou `/ms-config` e roda quando o usuário configurar a primeira marca. As "Perguntas em aberto" passam a ser respondidas dentro do `/ms-config`.
+> **Nota de execuçêo (2026-09-13):** o projeto foi construído com **provedores, marca e redes configuráveis** em `config.yaml` (decisêo do usuário), em vez de fixar Metricool/ARCKHÉfuturos. As Tasks 0, 2, 3, 4 e 5 estêo implementadas como skills + receitas genéricas; a Task 1 (voz de marca) virou `/ms-config` e roda quando o usuário configurar a primeira marca. As "Perguntas em aberto" passam a ser respondidas dentro do `/ms-config`.
 
-**Objetivo:** Reproduzir o "Social Autopilot" (Zubair Trabzada) na stack do Nei: um `brand-voice.md` da INEMA + 3 prompts (diário, semanal, reaproveitar) que pesquisam, escrevem no tom da marca, geram o visual, e **agendam pelo Metricool só depois do "sim"** explícito.
+**Objetivo:** Reproduzir o "Social Autopilot" (Zubair Trabzada) na stack do Nei: um `brand-voice.md` da ARCKHÉ + 3 prompts (diário, semanal, reaproveitar) que pesquisam, escrevem no tom da marca, geram o visual, e **agendam pelo Metricool só depois do "sim"** explícito.
 
 **Arquitetura:** Zero código de aplicaçêo. O sistema é (1) um arquivo de voz, (2) três skills locais do projeto que encapsulam os prompts do pack, (3) o pipeline visual → host público → `createScheduledPost`. Tudo roda dentro do Claude Code neste diretório.
 
-**Stack:** Claude Code (Fable 5.1) · Metricool MCP (já conectado, OAuth) · flux2-klein (imagem, default) / Magnific (fallback) · `gh release upload` em `inematds/midia` (host de mídia) · git → `inematds/ms-v7`.
+**Stack:** Claude Code (Fable 5.1) · Metricool MCP (já conectado, OAuth) · flux2-klein (imagem, default) / Magnific (fallback) · `gh release upload` em `linnoff88-dev/midia` (host de mídia) · git → `linnoff88-dev/ms-v7`.
 
 **Spec:** `docs/Social-Autopilot-Prompt-Pack.txt` (os 3 prompts + bônus), `docs/brand-voice-template.md` (template), `docs/social-media-automation-fable-5.md` (transcriçêo do vídeo). Referência da integraçêo já validada: `~/projetos/pubmetricool/docs/`.
 
@@ -18,21 +18,21 @@
 |---|---|---|
 | Blotato MCP (posta) | **Metricool MCP** | Já conectado e validado em 2026-08-19 (`pubmetricool`). Free, permanente. |
 | Higgsfield MCP (imagem/vídeo) | **flux2-klein** por default; **Magnific** quando o flux nêo der conta (referência de personagem, vídeo) | Regra global do CLAUDE.md. |
-| Upload direto de mídia pelo MCP | **GitHub Release em `inematds/midia`** → URL pública | Metricool só aceita URL direta de arquivo. Passo que o pack nêo tem. |
+| Upload direto de mídia pelo MCP | **GitHub Release em `linnoff88-dev/midia`** → URL pública | Metricool só aceita URL direta de arquivo. Passo que o pack nêo tem. |
 | 6 plataformas (IG, X, LinkedIn, TikTok, FB, YT) | **Instagram + TikTok** na fase 1 | Plano Free da Metricool nêo conecta LinkedIn nem X. YouTube conectado é o canal-origem do `yt-pub-lives` (agendar lá duplica). |
-| Brand voice genérico (Alex, café) | **INEMA / Nei**, semeado da skill `roteirista-inema` | Contexto fixo já existe: 40 anos em tecnologia, anti-guru, só CLUB em Reels, público 40+. |
+| Brand voice genérico (Alex, café) | **ARCKHÉ / Nei**, semeado da skill `roteirista-ARCKHÉ` | Contexto fixo já existe: 40 anos em tecnologia, anti-guru, só CLUB em Reels, público 40+. |
 | "Routines" do Claude Desktop | Skill `/ms-semana` rodada à mêo (15 min/semana) | Sem daemon; aprovaçêo humana é feature. |
 
 ## Restrições globais
 
-- Marca Metricool: `label inemafuturos · blogId 6745962 · timezone America/Sao_Paulo`. Redes: Instagram `@inemafuturos`, TikTok `@lnema.club`, YouTube `UC2QbQDyPKuHk93dwo5iq3Sw` (**nêo agendar** YouTube — ver Perguntas em aberto).
+- Marca Metricool: `label ARCKHÉfuturos · blogId 6745962 · timezone America/Sao_Paulo`. Redes: Instagram `@ARCKHÉfuturos`, TikTok `@lnema.club`, YouTube `UC2QbQDyPKuHk93dwo5iq3Sw` (**nêo agendar** YouTube — ver Perguntas em aberto).
 - Cota: **20 posts/mês** no Free (nêo documentado se `draft` ou post multi-rede conta 1 ou N — conferir no app). Analytics: janela de **30 dias**. Nêo há ferramenta de *delete* no MCP → cada teste real gasta cota e precisa ser cancelado no app.
 - `createScheduledPost` exige `publicationDate`; "agora" = agora + 5 min com `autoPublish: true`. `updateScheduledPost` exige `id` **e** `uuid` e o payload completo.
 - Mídia: Reels/TikTok 9:16 (1080×1920); feed IG 4:5 (1080×1350); carrossel IG até 10 imagens 4:5.
 - Nunca publicar/agendar sem "sim" explícito do usuário no chat. Nunca inventar números, histórias ou estatísticas.
-- Palavras proibidas (herdadas do roteirista-inema): "segredo", "hack", "truque", "fórmula mágica", "método infalível", "renda extra". Autoridade: **"40 anos em tecnologia"**, nunca "40 anos em IA". Em Reels só se menciona o INEMA.CLUB (nunca PRO/imersões).
+- Palavras proibidas (herdadas do roteirista-ARCKHÉ): "segredo", "hack", "truque", "fórmula mágica", "método infalível", "renda extra". Autoridade: **"40 anos em tecnologia"**, nunca "40 anos em IA". Em Reels só se menciona o ARCKHÉ AI (nunca PRO/imersões).
 - Anti-AI-speak (do pack): sem "game-changer", "unlock", "delve", "elevate", pergunta retórica de abertura, muro de hashtags.
-- Git: repo `inematds/ms-v7`, autor `inematds <inematds@gmail.com>`. Publicar = commit + push.
+- Git: repo `linnoff88-dev/ms-v7`, autor `linnoff88-dev <linnoff88-dev@gmail.com>`. Publicar = commit + push.
 - Versêo: `v1.0.0` ao fechar a Fase 1. Semver do CLAUDE.md global.
 
 ## Estrutura de arquivos
@@ -42,7 +42,7 @@ ms-v7/
 ├── CLAUDE.md                     # contexto do projeto p/ o Claude Code (Task 0)
 ├── README.md                     # como usar em 10 linhas (Task 0)
 ├── VERSION                       # 1.0.0 (Task 6)
-├── brand-voice.md                # A voz da INEMA — o arquivo que faz tudo (Task 1)
+├── brand-voice.md                # A voz da ARCKHÉ — o arquivo que faz tudo (Task 1)
 ├── docs/                         # fontes originais + este plano
 ├── .claude/skills/
 │   ├── ms-post/SKILL.md          # Prompt 2 — post do dia (Task 2)
@@ -62,28 +62,28 @@ ms-v7/
 
 **Arquivos:** criar `CLAUDE.md`, `README.md`, `.gitignore`; `git init`.
 
-- [ ] **Passo 1:** `git init` em `~/projetos/ms-v7`; `git config user.name inematds`; `git config user.email inematds@gmail.com`.
+- [ ] **Passo 1:** `git init` em `~/projetos/ms-v7`; `git config user.name linnoff88-dev`; `git config user.email linnoff88-dev@gmail.com`.
 - [ ] **Passo 2:** Escrever `CLAUDE.md` com: propósito (1 parágrafo), a tabela "Restrições globais" acima copiada verbatim, os 3 comandos (`/ms-post`, `/ms-semana`, `/ms-reaproveita`), a regra "leia `brand-voice.md` antes de escrever qualquer post", e a regra "nunca chame `createScheduledPost` sem 'sim' do usuário na mesma conversa".
 - [ ] **Passo 3:** `.gitignore` com `output/`, `*.mp4`, `*.png` fora de `posts/` (imagens finais aprovadas ficam em `posts/`, rascunhos nêo).
 - [ ] **Passo 4:** `README.md` — o fluxo em 10 linhas: preencher voz uma vez → `/ms-post` → aprovar → agendado.
-- [ ] **Passo 5:** `gh auth status`; se a conta ativa nêo for `inematds`, `gh auth switch -u inematds`.
-- [ ] **Passo 6:** Verificar: `git status` limpo após `git add -A && git commit -m "chore: bootstrap ms-v7"`. Criar remoto `gh repo create inematds/ms-v7 --private --source=. --push`.
+- [ ] **Passo 5:** `gh auth status`; se a conta ativa nêo for `linnoff88-dev`, `gh auth switch -u linnoff88-dev`.
+- [ ] **Passo 6:** Verificar: `git status` limpo após `git add -A && git commit -m "chore: bootstrap ms-v7"`. Criar remoto `gh repo create linnoff88-dev/ms-v7 --private --source=. --push`.
 
-**Verificaçêo:** `git log --oneline` mostra 1 commit com autor `inematds`; `gh repo view inematds/ms-v7` responde.
+**Verificaçêo:** `git log --oneline` mostra 1 commit com autor `linnoff88-dev`; `gh repo view linnoff88-dev/ms-v7` responde.
 
 ---
 
-### Task 1: `brand-voice.md` da INEMA (Prompt 1, uma vez)
+### Task 1: `brand-voice.md` da ARCKHÉ (Prompt 1, uma vez)
 
 **Arquivos:** criar `brand-voice.md` a partir de `docs/brand-voice-template.md`.
 
 **Produz:** o arquivo que TODAS as skills leem. Seções obrigatórias (mesmos títulos do template, em PT-BR): QUEM SOU · PÚBLICO · OFERTAS & CTAs · REGRAS DE VOZ · MINHAS FRASES · MINHAS HISTÓRIAS · PROVA QUE POSSO AFIRMAR · PILARES · ESTILOS POR PLATAFORMA (Instagram, TikTok; LinkedIn/X/Facebook/YouTube mantidos mas marcados `[inativo — nêo conectado]`).
 
-- [ ] **Passo 1: Pré-preencher** o que já existe, sem perguntar. Fonte: `~/.claude/skills/roteirista-inema/SKILL.md` (bloco "Contexto fixo do canal") e `~/.claude/skills/reel-edita-inema/SKILL.md`. Entram: QUEM SOU (Nei, 40 anos em tecnologia, ensina fundamentos de IA — Claude Code, terminal, documentaçêo — para profissionais 40+ no Brasil), PÚBLICO (profissionais adultos que temem perder relevância pela IA; querem fundamento, nêo ferramenta), tese central ("IA se aprende lendo, nêo assistindo"), NUNCA (lista de palavras proibidas + guru), OFERTAS (INEMA.CLUB gratuito → CTA "link na bio"; engajamento → "me conta nos comentários"), PILARES (Claude Code na prática · Ler documentaçêo/system prompts · Mitos de IA · Fundamento vence ferramenta · Bastidores do Nei).
-- [ ] **Passo 2: Entrevista em texto livre, UMA pergunta por vez**, só para as lacunas que ninguém pode inventar: (a) 5 frases que o Nei realmente fala; (b) 3 histórias VERDADEIRAS com número e detalhe (uma vitória, um erro, uma surpresa); (c) prova que pode afirmar (anos, alunos, cursos publicados, seguidores); (d) 2 CTAs extras além de "link na bio"; (e) estilo visual (dark âmbar INEMA? terminal na tela? rosto?). Rejeitar resposta vaga ("muitos alunos" → "quantos?").
+- [ ] **Passo 1: Pré-preencher** o que já existe, sem perguntar. Fonte: `~/.claude/skills/roteirista-ARCKHÉ/SKILL.md` (bloco "Contexto fixo do canal") e `~/.claude/skills/reel-edita-ARCKHÉ/SKILL.md`. Entram: QUEM SOU (Nei, 40 anos em tecnologia, ensina fundamentos de IA — Claude Code, terminal, documentaçêo — para profissionais 40+ no Brasil), PÚBLICO (profissionais adultos que temem perder relevância pela IA; querem fundamento, nêo ferramenta), tese central ("IA se aprende lendo, nêo assistindo"), NUNCA (lista de palavras proibidas + guru), OFERTAS (ARCKHÉ AI gratuito → CTA "link na bio"; engajamento → "me conta nos comentários"), PILARES (Claude Code na prática · Ler documentaçêo/system prompts · Mitos de IA · Fundamento vence ferramenta · Bastidores do Nei).
+- [ ] **Passo 2: Entrevista em texto livre, UMA pergunta por vez**, só para as lacunas que ninguém pode inventar: (a) 5 frases que o Nei realmente fala; (b) 3 histórias VERDADEIRAS com número e detalhe (uma vitória, um erro, uma surpresa); (c) prova que pode afirmar (anos, alunos, cursos publicados, seguidores); (d) 2 CTAs extras além de "link na bio"; (e) estilo visual (dark âmbar ARCKHÉ? terminal na tela? rosto?). Rejeitar resposta vaga ("muitos alunos" → "quantos?").
 - [ ] **Passo 3:** Gravar `brand-voice.md`. Regras de plataforma da Fase 1: **Instagram** (gancho ≤ 8 palavras na 1ª linha; linhas curtas; ≤ 5 hashtags no fim; formatos: Reel 30–60s, carrossel 6–10 slides com slide 1 = frase grande, foto única 4:5); **TikTok** (roteiro 30–45s falado + texto na tela; gancho nos 2 primeiros segundos; energia de bastidor).
 - [ ] **Passo 4: Teste de voz.** Sem outra fonte além do arquivo, escrever 1 legenda de Instagram sobre "ler documentaçêo". Critérios de aprovaçêo: contém ≥ 1 história/número/frase do arquivo; nenhuma palavra proibida; gancho ≤ 8 palavras; o Nei responde em texto "eu escreveria isso" — se "nêo", voltar ao Passo 2 na seçêo que falhou.
-- [ ] **Passo 5:** `git commit -m "feat: brand-voice.md da INEMA"`.
+- [ ] **Passo 5:** `git commit -m "feat: brand-voice.md da ARCKHÉ"`.
 
 **Verificaçêo:** `grep -c "40 anos em IA" brand-voice.md` retorna 0; `grep -c "40 anos em tecnologia"` ≥ 1; teste de voz aprovado.
 
@@ -99,7 +99,7 @@ ms-v7/
   1. Ler `brand-voice.md` inteiro.
   2. Três perguntas, **em texto livre, uma por vez, esperando resposta**: plataforma (Instagram ou TikTok — se disser LinkedIn/X, avisar que nêo está conectado e oferecer texto copy-paste); tema (algo que aconteceu / algo pra ensinar / oferta / "pesquise o que está em alta no nicho e me traga 5 ângulos"); objetivo (crescer seguidores / DMs e leads / vender / conversa).
   3. Pesquisa (só se pedido ou tema = "em alta"): usar skill `agent-reach` ou `WebSearch` para "o que funciona esta semana" na plataforma (ganchos, formatos, duraçêo). Resumir em 5 linhas, com fontes.
-  4. Escrever **3 opções**, cada uma com: ≥ 1 história/número/frase do arquivo; regras da plataforma; ZERO AI-speak; exatamente **1 CTA** compatível com o objetivo. Para Reel/TikTok, a opçêo é um roteiro no formato do `roteirista-inema` (0-3s gancho / 3-20s / 20-40s / fechamento).
+  4. Escrever **3 opções**, cada uma com: ≥ 1 história/número/frase do arquivo; regras da plataforma; ZERO AI-speak; exatamente **1 CTA** compatível com o objetivo. Para Reel/TikTok, a opçêo é um roteiro no formato do `roteirista-ARCKHÉ` (0-3s gancho / 3-20s / 20-40s / fechamento).
   5. Esperar a escolha (texto). Gravar `posts/<data>-<slug>/post.md`.
   6. Visual: seguir `pipeline/visual.md` (Task 3). Mostrar o caminho do arquivo.
   7. Agendamento: seguir `pipeline/agendar.md`. Mostrar **post final + horário proposto** (via `getBestTimeToPostByNetwork`) e perguntar em texto: "Agendo? (sim/nêo)". Respostas aceitas: **"sim"** → `createScheduledPost` com `autoPublish: true`; **"rascunho"** → `createScheduledPost` com `draft: true` (fica no planner, nêo publica); **"nêo"** ou sem MCP → entregar texto pronto pra copiar.
@@ -118,18 +118,18 @@ ms-v7/
   - Default **flux2-klein**. Prompt base = "estilo visual" do `brand-voice.md` + formato. Tamanhos: Reel/TikTok capa `1080x1920`; feed/carrossel `1080x1350`. Saída em `~/projetos/output/ms-v7/<data>-<slug>/`.
   - Carrossel: slide 1 = frase-gancho grande (texto vem do post, nêo do gerador de imagem — texto renderizado via HTML→PNG ou sobreposto com Pillow/ImageMagick, porque flux erra tipografia); slides 2..N = 1 ideia por slide; último = CTA.
   - Fallback **Magnific** (ler `~/.claude/runbooks/magnific-modelos.md`): `z-image` 5cr / `flux-2-klein` 10cr para imagem; `kling-25` 140cr para vídeo 5s. Nunca `auto`. `simulate_cost` antes de lote > 10.
-  - Vídeo curto sem IA generativa: `pixflow-motion` (foto → movimento) ou `video-explicativo` (HTML→MP4). Música/SFX: inemavox/dlp. Voz: inemavox TTS `chatterbox`/`rachel`.
+  - Vídeo curto sem IA generativa: `pixflow-motion` (foto → movimento) ou `video-explicativo` (HTML→MP4). Música/SFX: ARCKHÉvox/dlp. Voz: ARCKHÉvox TTS `chatterbox`/`rachel`.
   - Aprovaçêo visual em texto antes de subir.
 - [ ] **Passo 2: `pipeline/agendar.md`** — copiar de `~/projetos/pubmetricool/docs/publicar-video.md` o que já foi validado e fixar:
   ```bash
   # host público (Metricool só aceita URL direta)
-  gh release upload v1 <arquivo> --repo inematds/midia --clobber
-  # → https://github.com/inematds/midia/releases/download/v1/<arquivo>
+  gh release upload v1 <arquivo> --repo linnoff88-dev/midia --clobber
+  # → https://github.com/linnoff88-dev/midia/releases/download/v1/<arquivo>
   ```
   Ordem obrigatória de chamadas MCP: `getBrandSettings` (confirmar blogId 6745962 + fuso) → `getBestTimeToPostByNetwork(network)` (propor 1 horário) → mostrar post+hora → **"sim"** → `createScheduledPost`. Payloads de referência:
   ```jsonc
   // Reel IG + TikTok
-  {"text":"...", "media":["https://github.com/inematds/midia/releases/download/v1/x.mp4"],
+  {"text":"...", "media":["https://github.com/linnoff88-dev/midia/releases/download/v1/x.mp4"],
    "providers":[{"network":"instagram"},{"network":"tiktok"}],
    "publicationDate":{"dateTime":"2026-09-15T12:00:00","timezone":"America/Sao_Paulo"},
    "autoPublish":true, "draft":false,
@@ -193,7 +193,7 @@ ms-v7/
 
 ## Perguntas em aberto (responder em texto antes da Task 1)
 
-1. **Qual voz e qual marca?** A marca da Metricool é `inemafuturos` (IG) + `@lnema.club` (TikTok). A voz que vou semear é a do **INEMA.TDS / Nei** (roteirista-inema). É a mesma persona nessas contas, ou o `@inemafuturos` tem outra voz e precisa de um segundo `brand-voice.md`?
-2. **YouTube:** deixo fora do agendamento (recomendado), ou reaponto a marca para o INEMA TIA (`UCavuQHkxBSAZbzRoOm6Gq4g`)?
+1. **Qual voz e qual marca?** A marca da Metricool é `ARCKHÉfuturos` (IG) + `@lnema.club` (TikTok). A voz que vou semear é a do **ARCKHÉ.TDS / Nei** (roteirista-ARCKHÉ). É a mesma persona nessas contas, ou o `@ARCKHÉfuturos` tem outra voz e precisa de um segundo `brand-voice.md`?
+2. **YouTube:** deixo fora do agendamento (recomendado), ou reaponto a marca para o ARCKHÉ TIA (`UCavuQHkxBSAZbzRoOm6Gq4g`)?
 3. **Teste real da Task 3** gasta 1 dos 20 posts do mês (fica como rascunho, nêo publica). Ok?
-4. **Rosto no visual:** as imagens podem usar o avatar/foto do Nei (referência de personagem via Magnific) ou ficam só tipografia/terminal no estilo dark âmbar INEMA?
+4. **Rosto no visual:** as imagens podem usar o avatar/foto do Nei (referência de personagem via Magnific) ou ficam só tipografia/terminal no estilo dark âmbar ARCKHÉ?

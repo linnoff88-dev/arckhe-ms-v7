@@ -8,7 +8,7 @@ Adapted from *The Social Autopilot* (Zubair Trabzada, AI Workshop). The original
 
 ## 📖 User guide
 
-Full guide (landing page + walkthrough): **https://inematds.github.io/ms-v7/guia/en/**
+Full guide (landing page + walkthrough): **https://linnoff88-dev.github.io/arckhe-/guia/en/**
 
 ---
 
@@ -34,11 +34,11 @@ providers       ─┘        │
 | What | How | Required? |
 |---|---|---|
 | Claude Code | `claude.com/claude-code` — Pro plan or higher | yes |
-| This repo | `git clone git@github.com:inematds/ms-v7.git ~/projetos/ms-v7` | yes |
+| This repo | `git clone git@github.com:linnoff88-dev/ms-v7.git ~/projetos/ms-v7` | yes |
 | Python 3 + PyYAML | `pip install pyyaml` (only to validate `config.yaml`) | recommended |
 | Publishing provider | Metricool (MCP, free) or Blotato (MCP, paid) — see §4 | no (without one, `copy` mode) |
 | Image generator | local flux2-klein (default) or Magnific (MCP) | no |
-| Media host | `gh` authenticated with the `inematds` account (release in `inematds/midia`) | only with MCP provider |
+| Media host | `gh` authenticated with the `linnoff88-dev` account (release in `linnoff88-dev/midia`) | only with MCP provider |
 
 Open Claude Code **inside the folder**:
 
@@ -111,11 +111,11 @@ Nothing to connect. The skills provide the ready-to-use text in a code block, an
 MCP providers accept **direct image/video URLs** only. The default is a GitHub Release:
 
 ```bash
-gh release upload v1 arquivo.png --repo inematds/midia --clobber
-# → https://github.com/inematds/midia/releases/download/v1/arquivo.png
+gh release upload v1 arquivo.png --repo linnoff88-dev/midia --clobber
+# → https://github.com/linnoff88-dev/midia/releases/download/v1/arquivo.png
 ```
 
-The skills do this automatically; you only need `gh` logged into the `inematds` account.
+The skills do this automatically; you only need `gh` logged into the `linnoff88-dev` account.
 
 ---
 
@@ -143,22 +143,22 @@ The work **ends with the push**. Deployment is the webhook’s responsibility, n
 
 ```bash
 cd ~/projetos/ms-v7
-git config user.email   # must be inematds@gmail.com
+git config user.email   # must be linnoff88-dev@gmail.com
 git add -A
 git commit -m "post: 2026-09-15-ler-documentacao (instagram, agendado)"
 git push
 ```
 
 Rules:
-- Repo: `inematds/ms-v7`. Author and committer: `inematds <inematds@gmail.com>`. If `git config user.email` differs, fix it **locally** (`git config user.email inematds@gmail.com`), without changing the global config.
+- Repo: `linnoff88-dev/ms-v7`. Author and committer: `linnoff88-dev <linnoff88-dev@gmail.com>`. If `git config user.email` differs, fix it **locally** (`git config user.email linnoff88-dev@gmail.com`), without changing the global config.
 - The skills already commit at the end of each post/week. You only run `git push`.
-- Videos and images outside `posts/` are ignored by `.gitignore`. Public media goes in a release in the `inematds/midia` repo, never in this repo’s history.
+- Videos and images outside `posts/` are ignored by `.gitignore`. Public media goes in a release in the `linnoff88-dev/midia` repo, never in this repo’s history.
 - Version in `VERSION` and at the top of `CLAUDE.md` (`vX.XX.YY`: patch increments `YY`; feature increments `XX` and carries over `YY`; only a major resets).
 - Actual failure → one line in `FALHAS.md` (`| date | what broke | smallest fix | prompt \| infra |`).
 
 ---
 
-## 7. Publish to the portal (inema.club)
+## 7. Publish to the portal (ARCKHÉ AI)
 
 The portal points to a **landing page + guide** served by GitHub Pages **from this same repo** (never a separate repo).
 
@@ -168,31 +168,31 @@ The portal points to a **landing page + guide** served by GitHub Pages **from th
 /projetos-landing-guia
 ```
 
-Generates `guia/index.html` (self-contained, INEMA dark amber style) with `guia/assets/` alongside it.
+Generates `guia/index.html` (self-contained, ARCKHÉ dark amber style) with `guia/assets/` alongside it.
 
 **Step 2 — enable GitHub Pages via GitHub Actions** (the `.github/workflows/pages.yml` workflow is already in the repo; don’t use the “legacy” branch build, which gets stuck):
 
 ```bash
-gh repo edit inematds/ms-v7 --visibility public --accept-visibility-change-consequences   # Pages requires a public repo on the free plan
-gh api -X POST repos/inematds/ms-v7/pages -f build_type=workflow \
-  || gh api -X PUT repos/inematds/ms-v7/pages -f build_type=workflow
+gh repo edit linnoff88-dev/ms-v7 --visibility public --accept-visibility-change-consequences   # Pages requires a public repo on the free plan
+gh api -X POST repos/linnoff88-dev/ms-v7/pages -f build_type=workflow \
+  || gh api -X PUT repos/linnoff88-dev/ms-v7/pages -f build_type=workflow
 git add guia && git commit -m "docs: guia landing" && git push   # the push triggers deployment
-gh run list --repo inematds/ms-v7 --limit 3                       # monitor
+gh run list --repo linnoff88-dev/ms-v7 --limit 3                       # monitor
 ```
 
-> Commits that touch `.github/workflows/` must be pushed over SSH (`git@github.com:inematds/ms-v7.git`): the `inematds` account’s HTTPS token doesn’t have the `workflow` scope. This repo’s remote is already SSH.
+> Commits that touch `.github/workflows/` must be pushed over SSH (`git@github.com:linnoff88-dev/ms-v7.git`): the `linnoff88-dev` account’s HTTPS token doesn’t have the `workflow` scope. This repo’s remote is already SSH.
 
-Resulting URL: `https://inematds.github.io/ms-v7/guia/en/`. Check with `curl -sI <url> | head -1` (should return 200).
+Resulting URL: `https://linnoff88-dev.github.io/arckhe-/guia/en/`. Check with `curl -sI <url> | head -1` (should return 200).
 
 > Before making the repo public: `brands/` contains your brand voice and personal stories, and `posts/` contains the history. If you don’t want that public, move the guide to a `gh-pages` branch containing only `guia/`, or keep the repo private and host the guide somewhere else.
 
 **Step 3 — add it to the portal:**
 
 ```
-/atualiza-portal https://inematds.github.io/ms-v7/guia/en/
+/atualiza-portal https://linnoff88-dev.github.io/arckhe-/guia/en/
 ```
 
-The skill creates the card on all 3 INEMA surfaces (portal `inema.club`, inemabuscas, and the PRO catalog), commits, and pushes to all 3 repos. Vercel deploys automatically via the webhook; there’s no need (and you shouldn’t) check the dashboard.
+The skill creates the card on all 3 ARCKHÉ surfaces (portal `ARCKHÉ AI`, ARCKHÉbuscas, and the PRO catalog), commits, and pushes to all 3 repos. Vercel deploys automatically via the webhook; there’s no need (and you shouldn’t) check the dashboard.
 
 ---
 
@@ -216,7 +216,7 @@ ms-v7/
 │   └── semanas/<AAAA-WW>.md          plan + recap for each week
 ├── .claude/skills/
 │   ├── ms-config/   ms-post/   ms-semana/   ms-reaproveita/
-├── guia/                      landing page + guide (GitHub Pages) → inematds.github.io/ms-v7/guia/
+├── guia/                      landing page + guide (GitHub Pages) → linnoff88-dev.github.io/arckhe-/guia/
 └── docs/                      original prompt pack + PLANO.md
 ```
 
@@ -231,4 +231,4 @@ ms-v7/
 | `createScheduledPost` rejects media | URL isn’t a direct file or doesn’t return 200 | `curl -sI <url>`; redo `gh release upload` |
 | Duplicate post on YouTube | `youtube` network active for a brand whose channel is the source of another pipeline | `ativa: false` for youtube in `config.yaml` |
 | Empty analytics in the recap | Free plan’s 30-day window, or wrong connector | see `pipeline/publicar.md` § Analytics |
-| Push rejected due to author | wrong `user.email` | `git config user.email inematds@gmail.com` and empty commit |
+| Push rejected due to author | wrong `user.email` | `git config user.email linnoff88-dev@gmail.com` and empty commit |

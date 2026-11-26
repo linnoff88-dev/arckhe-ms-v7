@@ -14,7 +14,7 @@ Adaptado de *The Social Autopilot* (Zubair Trabzada, AI Workshop). Os originais 
 
 ## ê°Å¸ââ Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/ms-v7/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/arckhe-/guia/**
 
 ---
 
@@ -40,11 +40,11 @@ provedores      ê¢ââ¬ê¢âË        ê¢ââ
 | O quêÂª | Como | ObrigatêÂ³rio? |
 |---|---|---|
 | Claude Code | `claude.com/claude-code` ê¢â¬â plano Pro ou superior | sim |
-| Este repo | `git clone git@github.com:inematds/ms-v7.git ~/projetos/ms-v7` | sim |
+| Este repo | `git clone git@github.com:linnoff88-dev/ms-v7.git ~/projetos/ms-v7` | sim |
 | Python 3 + PyYAML | `pip install pyyaml` (sêÂ³ para validar o `config.yaml`) | recomendado |
 | Provedor de publicaêÂ§êÂ£o | Metricool (MCP, grêÂ¡tis) ou Blotato (MCP, pago) ê¢â¬â ver êÂ§4 | nêÂ£o (sem ele, modo `copiar`) |
 | Gerador de imagem | flux2-klein local (padrêÂ£o) ou Magnific (MCP) | nêÂ£o |
-| Host de mêÂ­dia | `gh` autenticado na conta `inematds` (release em `inematds/midia`) | sêÂ³ com provedor MCP |
+| Host de mêÂ­dia | `gh` autenticado na conta `linnoff88-dev` (release em `linnoff88-dev/midia`) | sêÂ³ com provedor MCP |
 
 Abra o Claude Code **dentro da pasta**:
 
@@ -117,11 +117,11 @@ Nada a conectar. As skills entregam o texto pronto em bloco de cêÂ³digo e v
 Provedores MCP sêÂ³ aceitam **URL direta** de imagem/vêÂ­deo. O padrêÂ£o êÂ© um GitHub Release:
 
 ```bash
-gh release upload v1 arquivo.png --repo inematds/midia --clobber
-# ê¢â â https://github.com/inematds/midia/releases/download/v1/arquivo.png
+gh release upload v1 arquivo.png --repo linnoff88-dev/midia --clobber
+# ê¢â â https://github.com/linnoff88-dev/midia/releases/download/v1/arquivo.png
 ```
 
-As skills fazem isso sozinhas; sêÂ³ precisa do `gh` logado na conta `inematds`.
+As skills fazem isso sozinhas; sêÂ³ precisa do `gh` logado na conta `linnoff88-dev`.
 
 ---
 
@@ -149,22 +149,22 @@ O trabalho **termina no push**. Deploy êÂ© responsabilidade do webhook, nê
 
 ```bash
 cd ~/projetos/ms-v7
-git config user.email   # tem que ser inematds@gmail.com
+git config user.email   # tem que ser linnoff88-dev@gmail.com
 git add -A
 git commit -m "post: 2026-09-15-ler-documentacao (instagram, agendado)"
 git push
 ```
 
 Regras:
-- Repo: `inematds/ms-v7`. Autor e committer: `inematds <inematds@gmail.com>`. Se `git config user.email` divergir, corrija **localmente** (`git config user.email inematds@gmail.com`), sem tocar a config global.
+- Repo: `linnoff88-dev/ms-v7`. Autor e committer: `linnoff88-dev <linnoff88-dev@gmail.com>`. Se `git config user.email` divergir, corrija **localmente** (`git config user.email linnoff88-dev@gmail.com`), sem tocar a config global.
 - As skills jêÂ¡ commitam ao final de cada post/semana. VocêÂª sêÂ³ dêÂ¡ o `git push`.
-- VêÂ­deos e imagens fora de `posts/` sêÂ£o ignorados pelo `.gitignore`. MêÂ­dia pêÂºblica vai em release no repo `inematds/midia`, nunca no histêÂ³rico deste.
+- VêÂ­deos e imagens fora de `posts/` sêÂ£o ignorados pelo `.gitignore`. MêÂ­dia pêÂºblica vai em release no repo `linnoff88-dev/midia`, nunca no histêÂ³rico deste.
 - VersêÂ£o em `VERSION` e no topo de `CLAUDE.md` (`vX.XX.YY`: patch incrementa `YY`; feature incrementa `XX` e carrega `YY`; sêÂ³ major zera).
 - Falha real ê¢â â uma linha em `FALHAS.md` (`| data | o que quebrou | menor correêÂ§êÂ£o | prompt \| infra |`).
 
 ---
 
-## 7. Publicar no portal (inema.club)
+## 7. Publicar no portal (ARCKHÉ AI)
 
 O portal aponta para uma **pêÂ¡gina landing + guia** servida pelo GitHub Pages **deste mesmo repo** (nunca um repo separado).
 
@@ -174,31 +174,31 @@ O portal aponta para uma **pêÂ¡gina landing + guia** servida pelo GitHub Pa
 /projetos-landing-guia
 ```
 
-Gera `guia/index.html` (self-contained, padrêÂ£o INEMA dark êÂ¢mbar) com `guia/assets/` ao lado.
+Gera `guia/index.html` (self-contained, padrêÂ£o ARCKHÉ dark êÂ¢mbar) com `guia/assets/` ao lado.
 
 **Passo 2 ê¢â¬â ativar o GitHub Pages via GitHub Actions** (o workflow `.github/workflows/pages.yml` jêÂ¡ estêÂ¡ no repo; nêÂ£o usar o build "legacy" por branch, que trava):
 
 ```bash
-gh repo edit inematds/ms-v7 --visibility public --accept-visibility-change-consequences   # Pages exige repo pêÂºblico no plano free
-gh api -X POST repos/inematds/ms-v7/pages -f build_type=workflow \
-  || gh api -X PUT repos/inematds/ms-v7/pages -f build_type=workflow
+gh repo edit linnoff88-dev/ms-v7 --visibility public --accept-visibility-change-consequences   # Pages exige repo pêÂºblico no plano free
+gh api -X POST repos/linnoff88-dev/ms-v7/pages -f build_type=workflow \
+  || gh api -X PUT repos/linnoff88-dev/ms-v7/pages -f build_type=workflow
 git add guia && git commit -m "docs: guia landing" && git push   # o push dispara o deploy
-gh run list --repo inematds/ms-v7 --limit 3                       # acompanhar
+gh run list --repo linnoff88-dev/ms-v7 --limit 3                       # acompanhar
 ```
 
-> Commits que tocam `.github/workflows/` precisam ir por SSH (`git@github.com:inematds/ms-v7.git`): o token HTTPS da conta `inematds` nêÂ£o tem o escopo `workflow`. O remote deste repo jêÂ¡ êÂ© SSH.
+> Commits que tocam `.github/workflows/` precisam ir por SSH (`git@github.com:linnoff88-dev/ms-v7.git`): o token HTTPS da conta `linnoff88-dev` nêÂ£o tem o escopo `workflow`. O remote deste repo jêÂ¡ êÂ© SSH.
 
-URL resultante: `https://inematds.github.io/ms-v7/guia/`. Conferir com `curl -sI <url> | head -1` (tem que responder 200).
+URL resultante: `https://linnoff88-dev.github.io/arckhe-/guia/`. Conferir com `curl -sI <url> | head -1` (tem que responder 200).
 
 > Antes de tornar pêÂºblico: `brands/` contêÂ©m sua voz de marca e histêÂ³rias pessoais, e `posts/` contêÂ©m o histêÂ³rico. Se nêÂ£o quiser isso pêÂºblico, mova o guia para um branch `gh-pages` sêÂ³ com `guia/`, ou mantenha o repo privado e hospede o guia em outro lugar.
 
 **Passo 3 ê¢â¬â colocar no portal:**
 
 ```
-/atualiza-portal https://inematds.github.io/ms-v7/guia/
+/atualiza-portal https://linnoff88-dev.github.io/arckhe-/guia/
 ```
 
-A skill cria o card nas 3 superfêÂ­cies INEMA (portal `inema.club`, inemabuscas e catêÂ¡logo PRO), commita e faz push nos 3 repos. O deploy no Vercel êÂ© automêÂ¡tico pelo webhook; nêÂ£o precisa (nem deve) checar o dashboard.
+A skill cria o card nas 3 superfêÂ­cies ARCKHÉ (portal `ARCKHÉ AI`, ARCKHÉbuscas e catêÂ¡logo PRO), commita e faz push nos 3 repos. O deploy no Vercel êÂ© automêÂ¡tico pelo webhook; nêÂ£o precisa (nem deve) checar o dashboard.
 
 ---
 
@@ -222,7 +222,7 @@ ms-v7/
 ê¢ââ   ê¢ââê¢ââ¬ê¢ââ¬ semanas/<AAAA-WW>.md          plano + retro de cada semana
 ê¢âÅê¢ââ¬ê¢ââ¬ .claude/skills/
 ê¢ââ   ê¢âÅê¢ââ¬ê¢ââ¬ ms-config/   ms-post/   ms-semana/   ms-reaproveita/
-ê¢âÅê¢ââ¬ê¢ââ¬ guia/                      landing + guia (GitHub Pages) ê¢â â inematds.github.io/ms-v7/guia/
+ê¢âÅê¢ââ¬ê¢ââ¬ guia/                      landing + guia (GitHub Pages) ê¢â â linnoff88-dev.github.io/arckhe-/guia/
 ê¢ââê¢ââ¬ê¢ââ¬ docs/                      originais do pack + PLANO.md
 ```
 
@@ -237,7 +237,7 @@ ms-v7/
 | `createScheduledPost` recusa a mêÂ­dia | URL nêÂ£o êÂ© arquivo direto ou nêÂ£o responde 200 | `curl -sI <url>`; refazer o `gh release upload` |
 | Post duplicou no YouTube | rede `youtube` ativa numa marca cujo canal êÂ© origem de outro pipeline | `ativa: false` para youtube no `config.yaml` |
 | Analytics vazio na retro | janela de 30 dias do Free, ou conector errado | ver `pipeline/publicar.md` êÂ§ Analytics |
-| Push recusado por autor | `user.email` errado | `git config user.email inematds@gmail.com` e commit vazio |
+| Push recusado por autor | `user.email` errado | `git config user.email linnoff88-dev@gmail.com` e commit vazio |
 
 ---
 

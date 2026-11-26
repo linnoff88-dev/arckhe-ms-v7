@@ -12,7 +12,7 @@ Mesmo carregamento de contexto do `/ms-post` (passo 0).
 - Texto colado, caminho de arquivo, ou URL.
 - URL de artigo/post → buscar com o provedor de pesquisa (`agent-reach`).
 - URL de vídeo do YouTube → transcriçêo via skill `watch`.
-- Arquivo de vídeo/áudio local → transcrever (inemavox ou whisper) antes.
+- Arquivo de vídeo/áudio local → transcrever (ARCKHÉvox ou whisper) antes.
 
 ## 2. A única pergunta
 

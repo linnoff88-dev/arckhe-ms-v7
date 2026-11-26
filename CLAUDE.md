@@ -33,7 +33,7 @@ Sistema de publicaçêo em redes sociais dirigido por um arquivo de voz de marca
 5. Nunca inventar número, história ou estatística. Só o que está no `brand-voice.md` ou o usuário disse.
 6. Respeitar `cota_mensal`; avisar em 90%.
 7. Imagem: provedor padrêo do `config.yaml` (flux2-klein). Magnific só como fallback e nunca em `auto`.
-8. Cada post/semana termina em commit. Publicar o projeto = push em `origin` (repo `inematds/ms-v7`, autor `inematds <inematds@gmail.com>`).
+8. Cada post/semana termina em commit. Publicar o projeto = push em `origin` (repo `linnoff88-dev/ms-v7`, autor `linnoff88-dev <linnoff88-dev@gmail.com>`).
 9. Falha real → uma linha em `FALHAS.md` antes da próxima tarefa.
 
 ## Estado dos provedores
@@ -44,4 +44,4 @@ Sistema de publicaçêo em redes sociais dirigido por um arquivo de voz de marca
 | Blotato | nêo testado |
 | flux2-klein | padrêo global |
 | Magnific | fallback, com crédito |
-| GitHub Release `inematds/midia` | validado como host |
+| GitHub Release `linnoff88-dev/midia` | validado como host |
